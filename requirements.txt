@@ -1,0 +1,7 @@
+termite
+rofi
+bspwm
+sxhkd
+xsetroot
+xrandr
+feh

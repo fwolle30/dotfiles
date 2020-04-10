@@ -1,0 +1,72 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	termite
+
+# program launcher
+super + @space
+	currentMonitor=$(bspc query -M -m --names); \
+	monitorNumber=$(bspc query -M --names | awk -v p="$currentMonitor" '$0 == p \{print NR-1\}' ); \
+	rofi -show run -m $monitorNumber
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+#
+# bspwm hotkeys
+#
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+super + {Left,Down,Up,Right}
+	bspc node -f {west,south,north,east}
+
+super + {1-9}
+	bspc desktop -f {1-9}
+
+super + shift + {1-9}
+	bspc node -d {1-9}
+
+super + m
+	bspc node -g marked
+
+super + s
+	bspc node any.marked -s @; \
+	bspc node any.marked -g marked=off \
+	bspc node last -f
+
+super + shift + {c,k}
+	bspc node {-c,-k}
+
+super + {Insert,Prior}
+	bspc node @parent -R {+90,-90}
+
+super + Home
+	bspc node -p {north,~north}
+
+super + Next
+	bspc node -p {east,~east}
+
+super + End
+	bspc node -p {south,~south}
+
+super + Delete
+	bspc node -p {west,~west}
+
+super + y 
+	bspc node -n last.\!automatic 
+
+super + {KP_Add,KP_Subtract}
+	bspc node @parent -r {+0.05,-0.05}
+
+super + b 
+	bspc node @parent {-B,-E}
