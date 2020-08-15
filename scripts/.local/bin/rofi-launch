@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+monitors=$(rofi --help | awk -e '$1 ~ "ID:" { printf $2":" } $1 ~ "name:" { printf $2"\n" }')
+currentMonitor=$(bspc query -M -m --names)
+monitorId=$(echo -ne "$monitors" | grep :$currentMonitor$ | cut -d: -f1)
+
+rofi -show drun -m $monitorId -show-icons

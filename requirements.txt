@@ -2,6 +2,15 @@ termite
 rofi
 bspwm
 sxhkd
-xsetroot
-xrandr
+xorg-xsetroot
+xorg-xrandr
 feh
+
+#ToDo: Test this
+#vifm
+# - https://github.com/seebye/ueberzug
+# - https://github.com/dirkvdb/ffmpegthumbnailer
+# - https://github.com/marianosimone/epub-thumbnailer
+# - https://github.com/sdushantha/fontpreview
+# - pdftoppm (from AUR)
+# - ImageMagick (you probably already have this)

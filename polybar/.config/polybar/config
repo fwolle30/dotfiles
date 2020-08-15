@@ -1,0 +1,191 @@
+[colors]
+background = #3C3D3E
+workspace-empty = #999
+workspace-active = #AAA
+
+[bar/mainbar]
+monitor = ${env:MONITOR:}
+enable-ipc = true
+wm-restack = bspwm
+override-redirect = true
+tray-position = right 
+
+font-0 = "Fira Code Light:pixelsize=10;2"
+font-1 = "Font Awesome 5 Free:style=solid:pixelsize=10;2"
+font-2 = "Font Awesome 5 Free:style=solid:pixelsize=12;2"
+font-3 = "Font Awesome 5 Free:style=regular:pixelsize=10;2"
+font-4 = "Font Awesome 5 Brands:style=regular:pixelsize=12;3"
+font-5 = "Pomicons:style=regular:pixelsize=12;3"
+
+width = 100%
+height = 24
+background = ${colors.background}
+
+modules-left = workspaces pomo spotify
+modules-center = title
+modules-right = cpu memory temp battery clock
+
+[bar/subbar]
+monitor = ${env:MONITOR:}
+enable-ipc = true
+wm-restack = bspwm
+override-redirect = true
+tray-position = none
+
+font-0 = "Fira Code Light:pixelsize=10;2"
+font-1 = "Font Awesome 5 Free:style=solid:pixelsize=10;2"
+font-2 = "Font Awesome 5 Free:style=solid:pixelsize=12;2"
+font-3 = "Font Awesome 5 Free:style=regular:pixelsize=10;2"
+font-4 = "Font Awesome 5 Brands:style=regular:pixelsize=12;3"
+font-5 = "Pomicons:style=regular:pixelsize=12;3"
+
+width = 100%
+height = 24
+background = ${colors.background}
+
+modules-left = workspaces spotify
+modules-center = title
+modules-right = cpu memory temp battery clock
+
+[module/workspaces]
+type = internal/xworkspaces
+pin-workspaces = true 
+
+icon-0 = 1;1
+icon-1 = 2;2
+icon-2 = 3;3
+icon-3 = 4;4
+icon-4 = 5;5
+icon-5 = 6;6
+
+icon-default = 0
+
+label-empty = "%{T4}%{T-}"
+label-empty-margin = 1
+label-empty-foreground = ${colors.workspace-empty}
+label-urgent = "%{T4}%{T-}"
+label-urgent-margin = 1
+label-urgent-foreground = ${colors.workspace-empty}
+label-active = "%{T2}%{T-}"
+label-active-margin = 1
+label-active-foreground = ${colors.workspace-active}
+label-occupied = "%{T4}%{T-}"
+label-occupied-margin = 1
+label-occupied-foreground = ${colors.workspace-empty}
+
+format = <label-state>
+format-margin = 1
+
+[module/pomo]
+type = custom/script
+exec = python3 -u /home/fwolbring/Projects/Timer/timer.py
+tail = true
+format = <label>
+label = %output%
+interval = 0
+click-left = kill -USR1 %pid%
+
+[module/spotify]
+type = custom/ipc
+
+hook-0 = echo ""
+hook-1 = python3 ~/.config/polybar/scripts/spotify/spotify_status.py -t 40
+
+initial = 1
+
+format = %{T5}%{T-} <output>
+format-margin = 1
+format-padding = 1
+
+[module/title]
+type = internal/xwindow
+
+format = <label>
+format-padding = 1
+
+[module/cpu]
+type = internal/cpu
+interval = 5
+
+label = %percentage:3,3%%
+
+format = %{T1}%{T-} <label>
+format-margin = 1
+format-padding = 1
+
+[module/memory]
+type = internal/memory
+interval = 5
+
+label = %percentage_used:3,3%%
+
+format = %{T1}%{T-} <label>
+format-padding = 1
+
+[module/temp]
+type = internal/temperature
+
+internal = 5
+thermal-zone = 0
+
+base-temperature = 20
+warn-temperature = 60
+
+label = %temperature-c%
+label-warn = %temperature-c%
+
+format =  %{T3}<ramp>%{T-} <label>
+format-warn = %{T3}%{T-} <label-warn>
+
+format-margin = 1
+format-padding = 1
+
+format-warn-margin = 1
+format-warn-padding = 1
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+[module/clock]
+type = internal/date
+interval = 1.0
+
+time = %H:%M
+date = %d.%m.%Y
+
+label = "%{F#CCC}%date%%{F-} %time%"
+
+format = "%{T2}%{T-} <label>"
+format-margin = 1
+format-padding = 1
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 99
+poll-interval = 5
+
+label-charging = %percentage:3,3%%
+label-discharging  = %percentage:3,3%%
+label-full = %percentage:3,3%%
+
+format-charging = <ramp-capacity> %{F#0f0}<label-charging>%{F-}
+format-discharging = <ramp-capacity> %{F#fe0}<label-discharging>%{F-} 
+format-full = <ramp-capacity> <label-full>
+
+format-charging-margin = 0
+format-charging-padding = 1
+
+format-discharging-margin = 0
+format-discharging-padding = 1
+
+format-full-margin = 0
+format-full-padding = 1
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 

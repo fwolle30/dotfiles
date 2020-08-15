@@ -1,3 +1,9 @@
+#!/usr/bin/env bash
+
 xsetroot -cursor_name left_ptr
-xrandr --output HDMI-2 --pos 0x0 --mode 1920x1080 --output DP-1 --pos 1920x0 --output DP-1 --pos 1920x0 --mode 1920x1080 --output eDP-1 --pos 1920x1080 --mode 1920x1080
-feh --bg-fill Pictures/geometric-deer.jpg
+wm.wallpaper
+picom -b 
+wm.polybar
+
+nm-applet
+guake

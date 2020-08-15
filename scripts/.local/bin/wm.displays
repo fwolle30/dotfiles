@@ -1,0 +1,12 @@
+
+#!/bin/bash
+
+vendor=$(get-edid -i -q -b 3 | xxd -s +8 -l 2 -ps)
+
+profile="work"
+
+if [[ $vendor == "05e3" ]]; then
+  profile="home"
+fi
+
+~/.local/bin/wm.displays-$profile

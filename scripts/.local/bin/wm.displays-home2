@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+xrandr --output DP1 --pos 1920x0 --mode 1920x1080 \
+       --output eDP1 --pos 1920x1080 --mode 1920x1080
+
+bspc monitor DP1 -g 1920x1080+1920+0
+bspc monitor eDP1 -g 1920x1080+1920+1080
+
+bspc monitor DP1 -d 1 2 3 4
+bspc monitor eDP1 -d 5 6 7 8 
+

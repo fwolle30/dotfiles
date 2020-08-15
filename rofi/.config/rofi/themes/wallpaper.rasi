@@ -1,0 +1,77 @@
+configuration {
+  show-icons: true;
+  icon-theme: "Numix-Circle";
+  font: "Fira Code Light 12";
+  display-drun: "Run :";
+}
+
+window {
+  border: 1;
+  border-color: black;
+  border-radius: 4px;
+  background-color: transparent;  
+}
+
+inputbar {
+  padding: 8 0;
+  background-color: #333333;
+  border: 0 0 1 0;
+  border-color: black;
+  children: [prompt, entry];
+}
+
+prompt {
+  margin: 0 8;
+  padding: 3 0;
+  background-color: transparent;
+  color: white;
+}
+
+entry {
+  border: 1;
+  border-color: black;
+  border-radius: 2;
+  padding: 2 4;
+  margin: 0 8 0 0;
+  color: white;
+  background-color: #3C3C3C;
+}
+
+mainbox {
+  spacing: 0;  
+  background-color: transparent;
+}
+
+listview { 
+  spacing: 2;
+  background-color: #1E1E1ED8;    
+  spacing: 8;
+  columns: 4;
+  lines: 3;
+  fixed-columns: true;
+  fixed-height: true;
+} 
+
+element {
+  padding: 2px 0;
+  margin: 8;
+  background-color: transparent;
+  orientation: vertical;
+  border-radius: 4;
+}
+
+element.selected {
+  background-color: #37373D;
+}
+
+element-icon {
+  size: 128;
+  expand: false;
+  margin: -8;
+}
+
+element-text {
+  padding: 8 0;
+  color: white;
+  padding: 0 8;
+}

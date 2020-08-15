@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+killall -q polybar
+
+~/.config/polybar/scripts/spotify/launchlistener.sh &
+
+monitors=$(bspc query -M --names)
+trayMonitor=eDP1
+
+vendor=$(get-edid -i -q -b 3 | xxd -s +8 -l 2 -ps)
+
+if [[ $vendor == "05e3" ]]; then
+  trayMonitor=vHDMI
+fi
+
+echo -ne $monitors | grep $trayMonitor > /dev/null
+if [ $? -gt 0 ]; then
+  trayMonitor=$(polybar -m | grep '(primary)' | cut -d: -f1)
+fi
+
+for i in $monitors; do
+  if [ "$i" = "$trayMonitor" ]; then
+    TRAY_POS=right MONITOR=$i polybar mainbar &
+  else
+    MONITOR=$i polybar subbar &  
+  fi;
+done

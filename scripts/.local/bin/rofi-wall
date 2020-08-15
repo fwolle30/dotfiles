@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+pictures=$(ls -l /home/fwolbring/Pictures/*.{jp{,e}g,png} 2> /dev/null | wc -l)
+let rest=$pictures%4
+let lines=$pictures/4
+
+if [ $rest > 0 ]; then
+  let lines=$lines+1
+fi
+
+export LINES=$lines
+rofi -show wallpaper -modi "wallpaper:rofi.wallpaper.sh" -theme wallpaper

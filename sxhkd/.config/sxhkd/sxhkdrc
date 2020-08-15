@@ -8,9 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	currentMonitor=$(bspc query -M -m --names); \
-	monitorNumber=$(bspc query -M --names | awk -v p="$currentMonitor" '$0 == p \{print NR-1\}' ); \
-	rofi -show run -m $monitorNumber
+	rofi-launch
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -66,7 +64,15 @@ super + y
 	bspc node -n last.\!automatic 
 
 super + {KP_Add,KP_Subtract}
-	bspc node @parent -r {+0.05,-0.05}
+	wm.bspwm_padding {+, -}
+#	bspc node @parent -r {+0.05,-0.05}
 
 super + b 
 	bspc node @parent {-B,-E}
+
+super + {f,g,t}
+	bspc node -t ~{floating,fullscreen,tiled}
+
+super + p
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
