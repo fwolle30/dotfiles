@@ -2,8 +2,8 @@
 
 xsetroot -cursor_name left_ptr
 wm.wallpaper
-picom -b 
-wm.polybar
+picom --experimental-backends & 
+wm.polybar &
 
-nm-applet
+nm-applet &
 guake
